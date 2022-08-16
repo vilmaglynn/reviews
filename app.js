@@ -49,4 +49,44 @@ const nextBtn =document.querySelector(".next-btn")
 const randomBtn =document.querySelector(".random-btn")
 
 //set starting item
-let current
+let currentItem = 0;
+
+//load initial item
+window.addEventListener("DOMContentLoaded", function(){
+showPerson()
+});
+
+//show person based on item
+
+function showPerson(){
+  const item = reviews[currentItem];
+  img.src = item.img;
+  author.textContent =item.name;
+  job.textContent =item.job;
+ info.textContent =item.text;
+}
+
+//show next person
+nextBtn.addEventListener("click",function(){
+  currentItem++
+  if (currentItem > reviews.length -1)
+  currentItem =0; 
+  showPerson();
+} );
+
+//show prev person
+prevBtn.addEventListener("click",function(){
+  currentItem--;
+  if (currentItem < 0) {
+    currentItem =  reviews.length -1
+  } 
+  
+  showPerson();
+} );
+
+//surprise me
+
+randomBtn.addEventListener("click", function(){
+ currentItem = Math.trunc(Math.random() * reviews.length)
+  showPerson()
+})
